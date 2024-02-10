@@ -9,6 +9,7 @@ flag=0
 tq=0
 wt=0
 tat=0
+context_switches=0
 
 declare -a at bt rt
 
@@ -37,6 +38,7 @@ for ((t = 0, cnt = 0; remain != 0; )); do
     elif ((rt[cnt] > 0)); then
         rt[cnt]=$((rt[cnt] - tq))
         t=$((t + tq))
+        ((context_switches++))
     fi
     if ((rt[cnt] == 0 && flag == 1)); then
         remain=$((remain - 1))
@@ -58,5 +60,7 @@ done
 echo -e "\nAverage Waiting Time= $(awk 'BEGIN {printf "%.2f", '$wt'/'$n'}')"
 
 echo -e "\nAvg Turnaround Time = $(awk 'BEGIN {printf "%.2f", '$tat'/'$n'}')"
+
+echo -e "\nNumber of Context Switches: $context_switches"
 
 exit 0

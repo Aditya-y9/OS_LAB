@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-// Function to generate Fibonacci sequence in a separate thread
 void *generateFibonacci(void *arg) {
     int n = *((int *)arg);
 
@@ -20,6 +19,8 @@ void *generateFibonacci(void *arg) {
     for (int i = 0; i < n; i++) {
         result[i] = fib[i];
     }
+
+    printf("Thread: Calculated Fibonacci sequence up to index %d.\n", n - 1);
 
     return result;
 }
@@ -40,11 +41,15 @@ int main(int argc, char *argv[]) {
     pthread_t tid;
     void *result;
 
+    printf("Main: Creating a thread to generate Fibonacci sequence.\n");
+
     // Create a separate thread to generate Fibonacci sequence
     if (pthread_create(&tid, NULL, generateFibonacci, &n) != 0) {
         perror("pthread_create error");
         exit(EXIT_FAILURE);
     }
+
+    printf("Main: Waiting for the thread to finish.\n");
 
     // Wait for the thread to finish
     if (pthread_join(tid, &result) != 0) {
@@ -52,9 +57,11 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    printf("Main: Thread has finished.\n");
+
     // Output the generated Fibonacci sequence
     int *fibonacciSequence = (int *)result;
-    printf("Fibonacci Sequence: ");
+    printf("Main: Fibonacci Sequence: ");
     for (int i = 0; i < n; i++) {
         printf("%d ", fibonacciSequence[i]);
     }
@@ -65,3 +72,4 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+

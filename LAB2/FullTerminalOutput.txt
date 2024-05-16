@@ -1,0 +1,207 @@
+aditya@aditya-VirtualBox:~$ cd LAB2
+aditya@aditya-VirtualBox:~/LAB2$ cat > A2.1
+#!/bin/bash
+
+if [ $1 -gt $2 ]; then
+    echo "The greatest number is: $1"
+elif [ $2 -gt $1 ]; then
+    echo "The greatest number is: $2"
+else
+    echo "Both numbers are equal."
+fi
+aditya@aditya-VirtualBox:~/LAB2$ chmod +x A2.1
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.1 7 6
+The greatest number is: 7
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.1 9 2
+The greatest number is: 9
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.1 2 9
+The greatest number is: 9
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.1 9 9
+Both numbers are equal.
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.1 5 6
+The greatest number is: 6
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.1 8 9
+The greatest number is: 9
+aditya@aditya-VirtualBox:~/LAB2$ cat > A2.2
+#!/bin/bash
+
+if [ $1 -gt $2 ] && [ $1 -gt $3 ]; then
+    echo "Your greatest number is: $1"
+elif [ $2 -gt $1 ] && [ $2 -gt $3 ]; then
+    echo "The greatest number is: $2"
+else
+    echo "The greatest number is: $3"
+fi
+aditya@aditya-VirtualBox:~/LAB2$ chmod +x A2.2
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.2 1 2 3
+The greatest number is: 3
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.2 9 8 7
+Your greatest number is: 9
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.2 1 1 1
+The greatest number is: 1
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.2 0 0 9
+The greatest number is: 9
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.2 10 99 76
+The greatest number is: 99
+aditya@aditya-VirtualBox:~/LAB2$ cat > A2.3.1
+#!/bin/bash
+
+for i in 1 2 3 4 5 6 7 8 9 10
+do
+    echo $i
+done
+aditya@aditya-VirtualBox:~/LAB2$ chmod +x A2.3.1
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.3.1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+aditya@aditya-VirtualBox:~/LAB2$ cat > A2.3.2
+#!/bin/bash
+
+i=1
+while [ $i -le 10 ]; do
+    echo $i
+    ((i++))
+done
+aditya@aditya-VirtualBox:~/LAB2$ chmod +x A2.3.2
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.3.2
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+aditya@aditya-VirtualBox:~/LAB2$ cat > calc_A2.4
+echo "Enter the first number:"
+read num1
+
+echo "Enter the operation (+, -, x, /):"
+read op
+
+echo "Enter the second number:"
+read num2
+
+if [ "$op" == "+" ]; then
+  echo "Your Answer is: $num1 $op $num2 = $(($num1 + $num2))"
+elif [ "$op" == "-" ]; then
+  echo "Your Answer is: $num1 $op $num2 = $(($num1 - $num2))"
+elif [ "$op" == "x" ]; then
+  echo "Your Answer is: $num1 $op $num2 = $(($num1 * $num2))"
+elif [ "$op" == "/" ]; then
+  if [ "$num2" -eq 0 ]; then
+    echo "Error: Division by zero is not allowed."
+  else
+    echo "Your Answer is: $num1 $op $num2 = $(($num1 / $num2))"
+  fi
+else
+  echo "Incorrect operator. Please use +, -, x, or /."
+fi
+aditya@aditya-VirtualBox:~/LAB2$ chmod +x calc_A2.4
+aditya@aditya-VirtualBox:~/LAB2$ ./calc_A2.4
+Enter the first number:
+7
+Enter the operation (+, -, x, /):
++
+Enter the second number:
+6
+Your Answer is: 7 + 6 = 13
+aditya@aditya-VirtualBox:~/LAB2$ ./calc_A2.4
+Enter the first number:
+9
+Enter the operation (+, -, x, /):
+/
+Enter the second number:
+3
+Your Answer is: 9 / 3 = 3
+aditya@aditya-VirtualBox:~/LAB2$ ./calc_A2.4
+Enter the first number:
+5
+Enter the operation (+, -, x, /):
+-
+Enter the second number:
+2
+Your Answer is: 5 - 2 = 3
+aditya@aditya-VirtualBox:~/LAB2$ ./calc_A2.4
+Enter the first number:
+5
+Enter the operation (+, -, x, /):
+-
+Enter the second number:
+4
+Your Answer is: 5 - 4 = 1
+aditya@aditya-VirtualBox:~/LAB2$ ./calc_A2.4
+Enter the first number:
+9
+Enter the operation (+, -, x, /):
+x
+Enter the second number:
+5
+Your Answer is: 9 x 5 = 45
+aditya@aditya-VirtualBox:~/LAB2$ ./calc_A2.4
+Enter the first number:
+9
+Enter the operation (+, -, x, /):
+x
+Enter the second number:
+11
+Your Answer is: 9 x 11 = 99
+aditya@aditya-VirtualBox:~/LAB2$ cat > A2.5
+#!/bin/bash
+
+if [ "$#" -ne 8 ]; then
+    echo "Please enter details in the Following format: $0 <Name> <Address> <Phone> <Email> <Degree> <Major> <University> <GraduationYear>"
+    exit 1
+fi
+
+NAME=$1
+ADDRESS=$2
+PHONE=$3
+EMAIL=$4
+DEGREE=$5
+MAJOR=$6
+UNIVERSITY=$7
+GRADUATION_YEAR=$8
+
+echo "---------------- My Resume ----------------" > resume.txt
+echo "" >> resume.txt
+
+echo "===== Personal Details =====" >> resume.txt
+
+echo "Name: $NAME" >> resume.txt
+echo "Address: $ADDRESS" >> resume.txt
+echo "Phone: $PHONE" >> resume.txt
+echo "Email: $EMAIL" >> resume.txt
+echo "" >> resume.txt
+
+echo "===== Academic Details =====" >> resume.txt
+echo "" >> resume.txt
+
+echo "Education:" >> resume.txt
+echo "  Degree: $DEGREE" >> resume.txt
+echo "  Major: $MAJOR" >> resume.txt
+echo "  University: $UNIVERSITY" >> resume.txt
+echo "  Graduation Year: $GRADUATION_YEAR" >> resume.txt
+echo "" >> resume.txt
+
+echo "" >> resume.txt
+
+echo "--------------- End of Resume ----------------" >> resume.txt
+
+echo "Open resume.txt for your details"
+aditya@aditya-VirtualBox:~/LAB2$ chmod +x A2.5
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.5 Aditya Parel 9989998988
+Please enter details in the Following format: ./A2.5 <Name> <Address> <Phone> <Email> <Degree> <Major> <University> <GraduationYear>
+aditya@aditya-VirtualBox:~/LAB2$ ./A2.5 Aditya Parel 9999999999 amyedurkar_b22@it.vjti.ac.in BTech IT VJTI,Mumbai 2026
+Open resume.txt for your details
+aditya@aditya-VirtualBox:~/LAB2$

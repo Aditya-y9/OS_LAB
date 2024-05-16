@@ -1,0 +1,11 @@
+Indexed allocation
+Step 1. Start the program.
+Step 2. Initialize memory block status to ‘0’ to indicate that it is empty 
+Step 3. Enter index block and if index block status is ‘0’ then enter number of blocks needed on disk else if index block status is ‘1’ then enter another index block.
+Step 4. Initialize counter to ‘0’
+Step 5. If counter value is not equivalent to number of blocks needed go to Step 6 else go to Step 7.
+Step 6. Print the message “File in the index already allocated” and ask user to enter another indexed file and then go to Step 4 to allocate newly entered file to the memory block of the disk.
+Step 7. Run the loop until counter value is equal to number of blocks needed. Inside the loop enter the memory block to be allocated to file and increment counter.
+Step 8. Ask user to select among 1. Continue allocating more files 2. Exit options
+Step 9. If option 1 is chosen, go to step 3.
+Step 10.  If option 2 is chosen, exit the program.
